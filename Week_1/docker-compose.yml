@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+  namenode:
+    image: bim81929/hadoop-namenode:3.2.1
+    container_name: namenode
+    restart: always
+    ports:
+      - 9870:9870
+      - 9000:9000
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hadoop.env
+
+  datanode-1:
+    image: bim81929/hadoop-datanode:3.2.1
+    container_name: datanode-1
+    restart: always
+    volumes:
+      - hadoop_datanode-1:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./hadoop.env
+
+  datanode-2:
+    image: bim81929/hadoop-datanode:3.2.1
+    container_name: datanode-2
+    restart: always
+    volumes:
+      - hadoop_datanode-2:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./hadoop.env
+
+  datanode-3:
+    image: bim81929/hadoop-datanode:3.2.1
+    container_name: datanode-3
+    restart: always
+    volumes:
+      - hadoop_datanode-3:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+    env_file:
+      - ./hadoop.env
+  
+volumes:
+  hadoop_namenode:
+  hadoop_datanode-1:
+  hadoop_datanode-2:
+  hadoop_datanode-3:
