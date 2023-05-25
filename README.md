@@ -17,3 +17,6 @@
 # Upload txt file to HDFS
 `hadoop fs -mkdir hdfs://namenode:9000/week_1`
 `hadoop fs -put /opt/sample3.txt hdfs://namenode:9000/week_1`
+
+# Run spark cluster
+`docker compose up -d --sclae spark-worker=3`
