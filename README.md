@@ -20,3 +20,6 @@
 
 # Run spark cluster
 `docker compose up -d --sclae spark-worker=3`
+# Run Pyspark job wordcount
+`docker exec -it <spark master> /bin/bash`
+`cd app && python3 main.py`
