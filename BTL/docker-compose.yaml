@@ -39,6 +39,6 @@ services:
     environment:
       - TZ=Asia/Ho_Chi_Minh
     volumes:
-      - ./jupyter:/home
+      - ./jupyter:/home/jovyan
     ports:
       - 8888:8888

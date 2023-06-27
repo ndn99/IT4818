@@ -5,3 +5,6 @@ Week_1/base/hadoop.tar.gz.asc
 Week_1/hadoop_datanode-1/*
 Week_1/hadoop_datanode-2/*
 Week_1/hadoop_datanode-3/*
+
+BTL/jupyter/*
+BTL/spark/*
