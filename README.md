@@ -23,3 +23,6 @@
 # Run Pyspark job wordcount
 `docker exec -it <spark master> /bin/bash`
 `cd app && python3 main.py`
+
+# Run BTL
+`docker compose up -d --scale spark-worker=2`

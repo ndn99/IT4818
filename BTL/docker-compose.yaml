@@ -1,0 +1,44 @@
+version: '3'
+services:
+  spark-master:
+    image: docker.io/bitnami/spark:3.3
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - PYTHONPATH=/opt/bitnami/spark/app/:/opt/bitnami/spark/python/
+    ports:
+      - 7077:7077
+      - 8080:8080
+    volumes:
+      - ./spark:/opt/bitnami/spark/app
+  spark-worker:
+    image: docker.io/bitnami/spark:3.3
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - PYTHONPATH=/opt/bitnami/spark/app/:/opt/bitnami/spark/python/
+    volumes:
+      - ./spark:/opt/bitnami/spark/app
+    
+  streamsets:
+    image: bim81929/streamsets
+    ports:
+      - 18630:18630
+  
+  jupyter:
+    image: jupyter/all-spark-notebook:spark-3.3.0
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+    volumes:
+      - ./jupyter:/home
+    ports:
+      - 8888:8888
