@@ -28,11 +28,11 @@ services:
       - PYTHONPATH=/opt/bitnami/spark/app/:/opt/bitnami/spark/python/
     volumes:
       - ./spark:/opt/bitnami/spark/app
-    
-  streamsets:
-    image: bim81929/streamsets
-    ports:
-      - 18630:18630
+  
+#  streamsets:
+#    image: bim81929/streamsets
+#    ports:
+#      - 18630:18630
   
   jupyter:
     image: jupyter/all-spark-notebook:spark-3.3.0
@@ -42,3 +42,23 @@ services:
       - ./jupyter:/home/jovyan
     ports:
       - 8888:8888
+  
+  elasticsearch:
+    container_name: es-container
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.0
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    volumes:
+      - ./elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+  kibana:
+    container_name: kb-container
+    image: docker.elastic.co/kibana/kibana:8.7.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://es-container:9200
+    depends_on:
+      - elasticsearch
+    ports:
+      - 5601:5601
