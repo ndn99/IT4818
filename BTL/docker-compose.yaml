@@ -36,12 +36,11 @@ services:
   
   jupyter:
     image: jupyter/all-spark-notebook:spark-3.3.0
-    environment:
-      - TZ=Asia/Ho_Chi_Minh
     volumes:
-      - ./jupyter:/home/jovyan
+      - ./spark:/home/jovyan/work
+      - ./spark:/opt/bitnami/spark/app
     ports:
-      - 8888:8888
+      - "8888:8888"
   
   elasticsearch:
     container_name: es-container
