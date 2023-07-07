@@ -26,3 +26,5 @@
 
 # Run BTL
 `docker compose up -d --scale spark-worker=2`
+Tạo Folder csv và spark trong folder BTL. Copy file csv vào folder BTL/csv
+Đường dẫn đọc file khi chạy code là: /opt/bitnami/spark/app/<tên file>
