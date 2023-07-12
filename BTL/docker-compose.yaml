@@ -29,15 +29,12 @@ services:
       - PYSPARK_PYTHON=3.10.6
       - PYSPARK_DRIVER_PYTHON=3.10.6
   
-  # streamsets:
-  #  image: bim81929/streamsets
-  #  ports:
-  #    - 18630:18630
-  
   jupyter:
     image: bim81929/jupyter
     volumes:
       - ./spark:/home/jovyan/work
+      - ./jars:/home/jovyan/.ivy2/jars
+      - ./cache:/home/jovyan/.ivy2/cache
     ports:
       - "8888:8888"
   minio:
